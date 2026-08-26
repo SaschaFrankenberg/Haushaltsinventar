@@ -5,4 +5,5 @@
 @section('content')
     <h2>About</h2>
     <p>Test-View für Git-Übungen.</p>
+    <p>Hier kommen weitere Tests rein</p>
 @endsection
