@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('unit');
             $table->integer('minimum_quantity')->default(0);
             $table->text('expires_at')->nullable();
-            $table->integer('notes')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
