@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->string('name');
             $table->foreignId('category_id')->constrained();
             $table->foreignId('location_id')->constrained();
-            $table->integer('quantity');
-            $table->text('unit');
+            $table->integer('quantity')->default(0);
+            $table->string('unit');
             $table->integer('minimum_quantity')->default(0);
-            $table->text('expires_at')->nullable();
+            $table->date('expires_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
         });
