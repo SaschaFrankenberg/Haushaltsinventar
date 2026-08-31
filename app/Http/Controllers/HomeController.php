@@ -12,11 +12,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function items()
-    {
-        return view('items');
-    }
-
     public function about()
     {
         return view('about');

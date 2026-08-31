@@ -12,7 +12,7 @@
         <h1>Haushaltsinventar</h1>
         <nav>
             <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('items') }}">Items</a>
+            <a href="{{ route('items.index') }}">Items</a>
             <a href="{{ route('about') }}">About</a>
         </nav>
     </header>
