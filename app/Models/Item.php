@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Item extends Model
 {
+    protected $fillable = [
+        'name',
+        'category_id',
+        'location_id',
+        'quantity',
+        'unit',
+        'minimum_quantity',
+        'expires_at',
+        'notes',
+    ];
+    
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
