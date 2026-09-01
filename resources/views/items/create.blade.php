@@ -1,14 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'Item hinzufügen')
-{{-- Fehlermeldung-Ausgabe --}}
-@if ($errors->any())
-    <ul>
-        @foreach($errors->all() as $fehler)
-            <li> {{ $fehler }} </li>
-        @endforeach
-    </ul>
-@endif
 
 {{-- Formular zum Hinzufügen von Items --}}
 @section('content')
