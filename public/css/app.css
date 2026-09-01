@@ -1,180 +1,435 @@
+/* ==========================================================================
+   Haushaltsinventar — app.css
+   Ledger-/Vorratskammer-Ästhetik: warmes Pergament, Moosgrün, Senfgelb.
+   Aufgebaut auf CSS-Variablen (Design-Tokens), damit sich Farben, Radien
+   und Abstände zentral anpassen lassen. Am Ende stehen ein paar
+   zusätzliche, im aktuellen Markup noch ungenutzte Klassen (Buttons,
+   Badges, Cards) für künftige Views.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
 :root {
-    --color-background: #f5f7f8;
-    --color-surface: #ffffff;
-    --color-primary: #146c6e;
-    --color-primary-dark: #0f5557;
-    --color-text: #1f2933;
-    --color-text-muted: #5f6c72;
-    --color-border: #d7dee1;
-    --color-table-header: #e8f1f1;
-    --color-row-hover: #f3f8f8;
-    --color-footer: #27343a;
-    --color-footer-text: #edf3f3;
-    --radius: 8px;
-    --shadow: 0 4px 14px rgba(20, 45, 53, 0.08);
+  /* Farben */
+  --ink: #24231f;
+  --ink-soft: #55503f;
+  --paper: #efe9da;
+  --paper-card: #f7f4ea;
+  --moss: #4b5842;
+  --moss-dark: #343d2c;
+  --mustard: #c89b3c;
+  --brick: #a6452b;
+  --line: #d9d0b8;
+  --line-strong: #c3b895;
+
+  /* Typografie */
+  --font-display: 'Fraunces', 'Iowan Old Style', ui-serif, Georgia, serif;
+  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Abstände & Radien */
+  --space-1: 0.4rem;
+  --space-2: 0.8rem;
+  --space-3: 1.4rem;
+  --space-4: 2.2rem;
+  --space-5: 3.4rem;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Sonstiges */
+  --shadow-card: 0 1px 0 var(--line-strong), 0 8px 20px -14px rgba(36, 35, 31, 0.35);
+  --max-width: 68rem;
+  --content-measure: 62ch;
 }
 
-* {
-    box-sizing: border-box;
+/* --------------------------------------------------------------------------
+   2. Reset & Grundlagen
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.5;
-    color: var(--color-text);
-    background-color: var(--color-background);
+  margin: 0;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 100% 2.1rem;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
-header {
-    padding: 1.25rem 2rem;
-    color: #ffffff;
-    background-color: var(--color-primary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+img,
+svg {
+  max-width: 100%;
+  display: block;
 }
 
-header h1 {
-    max-width: 1200px;
-    margin: 0 auto 1rem;
-    font-size: 1.75rem;
+a {
+  color: var(--moss-dark);
+  text-decoration-color: var(--mustard);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    max-width: 1200px;
-    margin: 0 auto;
+a:hover {
+  color: var(--brick);
 }
 
-nav a {
-    padding: 0.5rem 0.75rem;
-    border-radius: 5px;
-    color: #ffffff;
-    font-weight: 600;
-    text-decoration: none;
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 2px;
 }
 
-nav a:hover,
-nav a:focus {
-    background-color: var(--color-primary-dark);
-    text-decoration: none;
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 var(--space-2);
+  color: var(--ink);
 }
 
-main {
-    width: min(1200px, calc(100% - 2rem));
-    min-height: calc(100vh - 170px);
-    margin: 2rem auto;
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background-color: var(--color-surface);
-    box-shadow: var(--shadow);
+h1 {
+  font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.6rem);
+  font-weight: 900;
 }
 
 h2 {
-    margin: 0 0 1.5rem;
-    color: var(--color-primary-dark);
-    font-size: 1.5rem;
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.8rem);
 }
 
 p {
-    color: var(--color-text-muted);
+  max-width: var(--content-measure);
+  color: var(--ink-soft);
 }
 
-.table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+/* --------------------------------------------------------------------------
+   3. Seitengerüst (app.blade.php)
+   -------------------------------------------------------------------------- */
+header {
+  background-color: var(--moss);
+  color: var(--paper-card);
+  padding: var(--space-3) var(--space-4) var(--space-4);
 }
 
-table {
-    width: 100%;
-    min-width: 900px;
-    border-collapse: collapse;
-    background-color: var(--color-surface);
+header h1 {
+  color: var(--paper-card);
+  margin: var(--space-1) 0 0;
 }
 
-th,
-td {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid var(--color-border);
-    text-align: left;
-    vertical-align: top;
-    white-space: nowrap;
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
 }
 
-th {
-    color: var(--color-primary-dark);
-    background-color: var(--color-table-header);
-    font-size: 0.9rem;
-    font-weight: 700;
+header nav a {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--moss-dark);
+  color: var(--paper-card);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #fafcfc;
+header nav a:hover {
+  background-color: var(--mustard);
+  color: var(--ink);
 }
 
-tbody tr:hover {
-    background-color: var(--color-row-hover);
-}
-
-tbody tr:last-child td {
-    border-bottom: 0;
-}
-
-.empty-message {
-    padding: 2rem;
-    color: var(--color-text-muted);
-    text-align: center;
-    white-space: normal;
+main {
+  display: block;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-4);
 }
 
 footer {
-    padding: 1.25rem 2rem;
-    color: var(--color-footer-text);
-    text-align: center;
-    background-color: var(--color-footer);
+  border-top: 1px solid var(--line-strong);
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
 }
 
-footer p {
-    margin: 0;
-    color: inherit;
+/* --------------------------------------------------------------------------
+   4. Tabelle — Ledger-Stil (index.blade.php)
+   -------------------------------------------------------------------------- */
+.table-wrapper {
+  overflow-x: auto;
+  background-color: var(--paper-card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
 
-@media (max-width: 600px) {
-    header {
-        padding: 1rem;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 44rem;
+}
 
-    header h1 {
-        margin-bottom: 0.75rem;
-        font-size: 1.4rem;
-    }
+thead th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--paper-card);
+  background-color: var(--moss-dark);
+  padding: var(--space-2) var(--space-2);
+  position: sticky;
+  top: 0;
+}
 
-    nav {
-        gap: 0.25rem;
-    }
+tbody td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink);
+  vertical-align: top;
+}
 
-    nav a {
-        padding: 0.5rem;
-        font-size: 0.9rem;
-    }
+/* Erste Datenspalte (Bezeichnung) bleibt lesbar in Fließschrift */
+tbody td:nth-child(2) {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
 
-    main {
-        width: min(100% - 1rem, 1200px);
-        margin: 1rem auto;
-        padding: 1rem;
-    }
+tbody tr:nth-child(even) {
+  background-color: rgba(75, 88, 66, 0.05);
+}
 
-    h2 {
-        font-size: 1.3rem;
-    }
+tbody tr:hover {
+  background-color: rgba(200, 155, 60, 0.12);
+}
 
-    th,
-    td {
-        padding: 0.7rem 0.8rem;
-    }
+tbody td[colspan] {
+  font-family: var(--font-body);
+  text-align: center;
+  color: var(--ink-soft);
+  padding: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   5. Formular — Karteikarten-Stil (create.blade.php)
+   -------------------------------------------------------------------------- */
+form {
+  background-color: var(--paper-card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+  max-width: 32rem;
+}
+
+/* Das <pre> im aktuellen Markup dient nur als Container fuer die Felder —
+   wir setzen die Monospace-/Whitespace-Vorgaben zurueck und machen daraus
+   ein Formular-Grid. Langfristig empfiehlt sich, <pre> durch
+   <div class="form-grid"> zu ersetzen; die Regel unten greift dann genauso. */
+form pre,
+form .form-grid {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  white-space: normal;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-1);
+  color: var(--moss-dark);
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"],
+form select,
+form textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  background-color: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: var(--moss);
+  box-shadow: 0 0 0 3px rgba(75, 88, 66, 0.18);
+}
+
+form textarea {
+  min-height: 5rem;
+  resize: vertical;
+  font-family: var(--font-mono);
+}
+
+form select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--moss) 50%),
+    linear-gradient(135deg, var(--moss) 50%, transparent 50%);
+  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: var(--space-4);
+}
+
+form a {
+  display: inline-block;
+  margin-top: var(--space-1);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   6. Erweiterbare Bausteine (im aktuellen Markup noch nicht genutzt)
+   -------------------------------------------------------------------------- */
+
+/* Buttons — z. B. fuer "Neues Item anlegen" statt eines nackten Links:
+   <a href="..." class="btn btn-primary">Neues Item anlegen</a> */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--moss);
+  color: var(--paper-card);
+}
+
+.btn-primary:hover {
+  background-color: var(--moss-dark);
+  color: var(--paper-card);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  border-color: var(--moss);
+  color: var(--moss-dark);
+}
+
+/* Badges — z. B. fuer Kategorien oder MHD-Status in der Tabelle:
+   <span class="badge badge-warning">läuft bald ab</span> */
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(75, 88, 66, 0.14);
+  color: var(--moss-dark);
+}
+
+.badge-warning {
+  background-color: rgba(166, 69, 43, 0.14);
+  color: var(--brick);
+}
+
+.badge-mustard {
+  background-color: rgba(200, 155, 60, 0.2);
+  color: #6b4f16;
+}
+
+/* Cards — fuer Dashboard-Kacheln, z. B. auf home.blade.php:
+   <div class="card"><h3>...</h3><p>...</p></div> */
+.card {
+  background-color: var(--paper-card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-card);
+}
+
+/* Alerts — fuer Flash-Messages nach dem Speichern:
+   <div class="alert alert-success">Item gespeichert.</div> */
+.alert {
+  border-left: 4px solid var(--moss);
+  background-color: rgba(75, 88, 66, 0.08);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: var(--space-3);
+  color: var(--ink);
+}
+
+.alert-error {
+  border-left-color: var(--brick);
+  background-color: rgba(166, 69, 43, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   7. Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  main {
+    padding: var(--space-3);
+  }
+
+  header {
+    padding: var(--space-3);
+  }
+
+  header nav a {
+    padding: var(--space-1) var(--space-2);
+    font-size: 0.85rem;
+  }
+
+  form {
+    padding: var(--space-3);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Bewegungspräferenz respektieren
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }

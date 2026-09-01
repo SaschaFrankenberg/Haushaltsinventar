@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreItemRequest;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Location;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    // Holt die Items aus beiden Tabellen und übergibt sie an die View
     public function index()
     {
         $items = Item::with('category', 'location')->get();
@@ -18,14 +20,23 @@ class ItemController extends Controller
         ]);
     }
 
+    // zeigt das Formular im Browser an und übergibt die Daten in die Select-Felder
     public function create()
     {
         $categories = Category::all();
         $locations = Location::all();
 
         return view('items.create', [
-            'categores' => $categories,
+            'categories' => $categories,
             'locations' => $locations,
         ]);
+    }
+
+    // Validierung der Eingaben
+    public function store(StoreItemRequest $request)
+    {
+        Item::create($request->validated());
+
+        return redirect()->route('items.index');
     }
 }

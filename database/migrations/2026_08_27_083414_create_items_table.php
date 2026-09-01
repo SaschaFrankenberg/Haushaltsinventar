@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained();
             $table->integer('quantity')->default(0);
             $table->string('unit');
-            $table->integer('minimum_quantity')->default(0);
             $table->date('expires_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();

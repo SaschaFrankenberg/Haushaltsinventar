@@ -13,10 +13,11 @@
                     <th>Kategorie</th>
                     <th>Lagerort</th>
                     <th>Menge</th>
-                    <th>Einheiten</th>
-                    <th>Mind. Anzahl</th>
+                    <th>Einheit</th>
                     <th>MHD</th>
                     <th>Notiz</th>
+                    <th>Zeitstempel</th>
+                    <th>Letztes Update</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +29,10 @@
                         <td>{{ $item->location->name }}</td>
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->unit }}</td>
-                        <td>{{ $item->minimum_quantity }}</td>
                         <td>{{ $item->expires_at ?? '-' }}</td>
                         <td>{{ $item->notes ?? '-' }}</td>
+                        <td>{{ $item->created_at->format('d.m.Y') }}</td>
+                        <td>{{ $item->created_at->format('d.m.Y') }}</td>
                     </tr>
                 @empty
                     <tr>
@@ -38,6 +40,7 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>
+        </table>      
     </div>
+    <a href="{{ route('items.create') }}">Neues Item anlegen</a>
 @endsection
