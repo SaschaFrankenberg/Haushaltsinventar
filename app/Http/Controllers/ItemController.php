@@ -32,11 +32,13 @@ class ItemController extends Controller
         ]);
     }
 
-    // Validierung der Eingaben
+    // Validierung der Eingaben und Meldung für den Erfolg
     public function store(StoreItemRequest $request)
     {
         Item::create($request->validated());
 
-        return redirect()->route('items.index');
+        return redirect()
+            ->route('items.index')
+            ->with('status', 'Item erfolgreich angelegt');
     }
 }
