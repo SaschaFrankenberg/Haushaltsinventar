@@ -31,5 +31,5 @@ Route::controller(ItemController::class)->prefix('items')->as('items.')->group(f
     Route::put('/{item}', 'update')->name('update');        // PUT      /items{id}          -> items.update
 
     // Item löschen
-    Route::delete('/{item}', 'destroy')->name('destroy');   // DELETE   /items/{id}     -> items.destroy
+    Route::delete('/{item}', 'destroy')->name('destroy');   // DELETE   /items/{id}         -> items.destroy
 });
