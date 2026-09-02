@@ -44,7 +44,7 @@ class StoreItemRequest extends FormRequest
             'category_id.exists' => 'Ungültige Kategorie.',
             'location_id.required' => 'Wähle einen Lagerort aus.',
             'location_id.exists' => 'Kein Lagerort gefunden?',
-            'quantity.required' => 'Feld darf nicht leer sein',
+            'quantity.required' => 'Feld darf nicht leer sein.',
             'quantity.numeric' => 'Es muss eine Zahl eingegeben werden.',
             'quantity.min' => 'Feld darf nicht leer sein.',
             'unit.required' => 'Feld darf nicht leer sein.',
