@@ -25,8 +25,8 @@ class StoreItemRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3'],
-            'category_id' => ['required', 'integer', 'exists:categories,id', 'array'],
-            'location_id' => ['required', 'integer', 'exists:locations,id', 'array'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+            'location_id' => ['required', 'integer', 'exists:locations,id'],
             'quantity' => ['required', 'numeric', 'min:0'],
             'unit' => ['required', 'string'],
             'expires_at' => ['nullable', 'date'],

@@ -32,7 +32,7 @@
                         <td>{{ $item->expires_at ?? '-' }}</td>
                         <td>{{ $item->notes ?? '-' }}</td>
                         <td>{{ $item->created_at->format('d.m.Y') }}</td>
-                        <td>{{ $item->created_at->format('d.m.Y') }}</td>
+                        <td>{{ $item->updated_at->format('d.m.Y') }}</td>
                     </tr>
                 @empty
                     <tr>
