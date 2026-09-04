@@ -41,4 +41,11 @@ class ItemController extends Controller
             ->route('items.index')
             ->with('status', 'Item erfolgreich angelegt');
     }
+
+    public function show(Item $item)
+    {
+        return view('items.show', [
+            'item' => $item,
+        ]);
+    }
 }

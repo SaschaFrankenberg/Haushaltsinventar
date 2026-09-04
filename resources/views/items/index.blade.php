@@ -24,7 +24,8 @@
                 @forelse ($items as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->name }}</td>
+                        <td><a href="{{ route('items.show', $item) }}">
+                                {{ $item->name }}</a>
                         <td>{{ $item->category->name }}</td>
                         <td>{{ $item->location->name }}</td>
                         <td>{{ $item->quantity }}</td>
@@ -40,7 +41,7 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>      
+        </table>
     </div>
     <a href="{{ route('items.create') }}">Neues Item anlegen</a>
 @endsection
